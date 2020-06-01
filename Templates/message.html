@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flack</title>
+
+    <link rel="stylesheet" href="{{ url_for ('static', filename='style/style.css')}}">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400|Rancho|Asap" />
+    
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+    <nav> 
+        <div class="channel-choice">
+            <select id="channel-choice">
+
+            </select>
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+       
+    </nav>
+
+    <div class="user-modal">
+        <div class="user-picture">
+            
+            <img src="{{ url_for ('static', filename='images/user.png')}}" alt="" class="userphoto">
+           
+            <input type="file" id="img" name="img" accept="image/*" onchange="preview(event)">
+            <svg id="add-picture" xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="none" xmlns:v="https://vecta.io/nano"><circle cx="16.5" cy="16.5" r="16.5" fill="#fff"/><path fill-rule="evenodd" d="M8 13v-2H6c-.55 0-1-.45-1-1s.45-1 1-1h2V7c0-.55.45-1 1-1s1 .45 1 1v2h2c.55 0 1 .45 1 1s-.45 1-1 1h-2v2c0 .55-.45 1-1 1s-1-.45-1-1zm10 9a3 3 0 1 1 0-6 3 3 0 1 1 0 6zm8-11c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H10c-1.1 0-2-.9-2-2V14.72c.3.17.63.28 1 .28 1.1 0 2-.9 2-2v-1h1c1.1 0 2-.9 2-2 0-.37-.1-.7-.28-1h6.4a1.99 1.99 0 0 1 1.47.65L22.83 11H26zm-8 13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z" fill="rgba(58, 60, 76, 1)"/></svg>
+            <button id='close-but'>&times</button>
+        </div>
+        <h1>{{ nickname|title }}</h1>
+    </div>
+
+    <div class="interface">
+        <div class="sidebar">
+            <div class="top-sidebar">
+                <div class="pers-info">
+                    <img src="{{ url_for ('static', filename='images/user.png')}}" alt="" class="userphoto">
+                    <h1>{{ nickname|title }}</h1>
+                </div>
+                <div class="tab-sidebar">
+                    <div class="tab-active" id="tab1" onclick="changemenu()" ><span></span></div>
+                    <div class="tab" id="tab2" onclick="changemenu()"><span></span></div>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="menu-header">
+                    Your channels :
+                </div>
+                <ul id='channel-list'>
+                    <li>public
+                        <ul name='public'></ul>
+                    </li>   
+                </ul>
+                <form id='add-channel' onsubmit="return(newchannel())"></form>
+                <div class ="add-channel">
+                    <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 13H20V7.238L12.072 14.338L4 7.216V19H14V21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H21C21.2652 3 21.5196 3.10536 21.7071 3.29289C21.8946 3.48043 22 3.73478 22 4V13ZM4.511 5L12.061 11.662L19.502 5H4.511ZM21 18H24V20H21V23H19V20H16V18H19V15H21V18Z" fill="white"/>
+                    </svg>
+                    <span>Add a new channel</span>
+                </div>    
+            </div>
+            <div class="menu" id="menu2">
+                <div class="menu-header">
+                    Existing channels :
+                </div>
+                <ul id='all-channels'> 
+                </ul>
+            </div>
+        </div>  
+        <div class="msg-box">
+            <div class="msg-container">
+            </div>
+            <form action="" id="msg-form">
+                 <input type="text" id="msg-input" autocomplete="off">
+            </form>
+            
+        </div>
+        <div class="alert-container">      
+        </div>
+               
+    </div>
+
+</body>
+</html>
+

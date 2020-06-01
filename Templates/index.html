@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flack</title>
+
+    <link rel="stylesheet" href="{{ url_for ('static', filename='style/style.css')}}">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400" />
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+    <div class="login">
+        <img src="{{ url_for ('static', filename='images/login bubull.png')}}" alt="" class="bubull">
+
+        <form action="{{ url_for ('message')}}" method="POST" onsubmit="return(validate());">
+            <input formmethod="POST" id="login" name="nickname" type="text"  autocomplete="off" placeholder="Choose a nickname" class='login-input' autofocus>
+        </form>
+        
+        <img src="{{ url_for ('static', filename='images/index.png')}}" alt="">
+
+    </div>
+
+    
+    
+</body>
+</html>
